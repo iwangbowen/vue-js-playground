@@ -36,6 +36,19 @@
             border-radius: 3px;
             background-color: #e0ffe0;
         }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f0f0f0;
+        }
     </style>
 </head>
 <body>
@@ -43,7 +56,16 @@
     <button id="tokenizeButton">Tokenize EVERYTHING</button>
     <div id="output"></div>
     <h2>Common HTML Entities</h2>
-    <div id="entities"></div>
+    <table id="entities">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Symbol</th>
+                <th>Code</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
 
     <script>
         document.getElementById('tokenizeButton').addEventListener('click', () => {
@@ -119,15 +141,21 @@
                 { name: 'Greater than', symbol: '&gt;', code: '&#62;' },
                 { name: 'Ampersand', symbol: '&amp;', code: '&#38;' },
                 { name: 'Double quote', symbol: '&quot;', code: '&#34;' },
-                { name: 'Single quote', symbol: '&apos;', code: '&#39;' }
+                { name: 'Single quote', symbol: '&apos;', code: '&#39;' },
+                { name: 'Cent', symbol: '&cent;', code: '&#162;' },
+                { name: 'Pound', symbol: '&pound;', code: '&#163;' },
+                { name: 'Yen', symbol: '&yen;', code: '&#165;' },
+                { name: 'Euro', symbol: '&euro;', code: '&#8364;' },
+                { name: 'Copyright', symbol: '&copy;', code: '&#169;' },
+                { name: 'Registered', symbol: '&reg;', code: '&#174;' },
+                { name: 'Trademark', symbol: '&trade;', code: '&#8482;' }
             ];
 
-            const entitiesDiv = document.getElementById('entities');
+            const tbody = document.getElementById('entities').querySelector('tbody');
             entities.forEach(entity => {
-                const div = document.createElement('div');
-                div.className = 'entity';
-                div.innerHTML = `<strong>${entity.name}:</strong> ${entity.symbol} (${entity.code})`;
-                entitiesDiv.appendChild(div);
+                const tr = document.createElement('tr');
+                tr.innerHTML = `<td>${entity.name}</td><td>${entity.symbol}</td><td>${entity.code}</td>`;
+                tbody.appendChild(tr);
             });
         }
 
