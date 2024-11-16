@@ -29,12 +29,21 @@
             border-radius: 3px;
             background-color: #d0d0ff;
         }
+        .entity {
+            display: inline-block;
+            margin: 2px;
+            padding: 2px 5px;
+            border-radius: 3px;
+            background-color: #e0ffe0;
+        }
     </style>
 </head>
 <body>
     <textarea id="input" placeholder="Enter HTML here..."></textarea>
     <button id="tokenizeButton">Tokenize EVERYTHING</button>
     <div id="output"></div>
+    <h2>Common HTML Entities</h2>
+    <div id="entities"></div>
 
     <script>
         document.getElementById('tokenizeButton').addEventListener('click', () => {
@@ -102,6 +111,27 @@
 
             showNextToken();
         }
+
+        function displayEntities() {
+            const entities = [
+                { name: 'Space', symbol: '&nbsp;', code: '&#160;' },
+                { name: 'Less than', symbol: '&lt;', code: '&#60;' },
+                { name: 'Greater than', symbol: '&gt;', code: '&#62;' },
+                { name: 'Ampersand', symbol: '&amp;', code: '&#38;' },
+                { name: 'Double quote', symbol: '&quot;', code: '&#34;' },
+                { name: 'Single quote', symbol: '&apos;', code: '&#39;' }
+            ];
+
+            const entitiesDiv = document.getElementById('entities');
+            entities.forEach(entity => {
+                const div = document.createElement('div');
+                div.className = 'entity';
+                div.innerHTML = `<strong>${entity.name}:</strong> ${entity.symbol} (${entity.code})`;
+                entitiesDiv.appendChild(div);
+            });
+        }
+
+        displayEntities();
     </script>
 </body>
 </html>
